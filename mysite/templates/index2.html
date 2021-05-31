@@ -63,20 +63,22 @@
     </div>
 </nav>
 
-<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
     <strong>Welcome to Text utils ! </strong> You can do whatever you want to with your text here !!!
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 
 <div class="container">
-    <form action="/analyze" method="post">
+    <form action="/analyze" method="post"> {%csrf_token%}
 
         <!--Text Area-->
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
             <label for="exampleFormControlTextarea1" class="form-label">Enter your text here and let textutils do the
                 magic</label>
-            <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="9"></textarea>
+            <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="9" required></textarea>
+
         </div>
 
         <!--Switches-->

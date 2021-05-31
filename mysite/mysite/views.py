@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
-    params = {'name':'Swapnil','place':'Mars'}
-    return  render(request,'index2.html',params)
+    return  render(request,'index2.html')
     # return HttpResponse("<h1>Hello</h1>")
 
 def analyze(request):
@@ -20,7 +19,7 @@ def analyze(request):
     if removepunc == "on":
         purpose = purpose+"Remove Punctuations"
         #Analyze text
-        punctuations = '''!,.;'"!(){}[]:-_\<>?@#%^*~`'''
+        punctuations = '''!,.;'"!(){}[]:-_\/<>?@#%^*~`'''
         for c in djtext:
             if c not in punctuations:
                 analyzed = analyzed+c
@@ -53,13 +52,15 @@ def analyze(request):
             analyzed = str(djtext)
         print(analyzed.count("\n"))
         analyzed = analyzed.replace("\n","")
+        analyzed = analyzed.replace("\r","")
         print(analyzed.count("\n"))
 
-
-    params = {'purpose': purpose, 'analyzed_text': analyzed, 'charcount':charcount}
-
-    return render(request, 'analyze2.html', params)
-    return HttpResponse("No option selected")
+    if purpose!="":
+        params = {'purpose': purpose, 'analyzed_text': analyzed, 'charcount':charcount}
+        return render(request, 'analyze2.html', params)
+    else:
+        params = {'purpose': "No Option selected", 'analyzed_text': "Please select at least 1 option !"}
+        return render(request, 'analyze2.html', params)
 
 def capitalizeFirst(request):
     return HttpResponse("capitalize First")
